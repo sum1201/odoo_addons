@@ -19,10 +19,11 @@
 
 {
     "name": "钉钉扫码登陆",
-    "version": "1.0",
-    "depends": ["base","auth_oauth","base_setup"],
+    "version": "11.0.1.0.0",
+    "license": "AGPL-3",
+    "depends": ["base", "auth_oauth", "base_setup"],
     "author": "山西清水欧度信息技术有限公司",
-    'website':'http://www.odooqs.com',
+    'website': 'http://www.odooqs.com',
     "category": "Tools",
     "description": """
     """,
