@@ -18,7 +18,7 @@
 #                                                                            #
 
 {
-    "name": "钉钉扫码登陆",
+    "name": "Dingtalk Oauth",
     "version": "11.0.1.0.0",
     "license": "AGPL-3",
     "depends": ["base", "auth_oauth", "base_setup"],

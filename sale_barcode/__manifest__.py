@@ -18,12 +18,15 @@
 #                                                                            #
 
 {
-    "name": "销售条码扫描",
-    "version": "1.0",
+    "name": "Sale Add Product By Scan",
+    "version": "11.0.1.0.0",
+    "license": "AGPL-3",
     "depends": ["base", "barcodes", "sale"],
-    "author": "山西清水欧度信息技术有限公司<lin.jun@odooqs.com>",
+    "author": "山西清水欧度信息技术有限公司",
     "category": "sale",
+    'website': 'http://www.odooqs.com',
     "description": """
+        Scan directly using scan code equipment 
     """,
     "data": [
         'views/sale_barcode_template.xml',
