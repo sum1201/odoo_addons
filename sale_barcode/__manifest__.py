@@ -23,7 +23,7 @@
     "license": "AGPL-3",
     "depends": ["base", "barcodes", "sale"],
     "author": "山西清水欧度信息技术有限公司",
-    "category": "sale",
+    "category": "Sales",
     'website': 'http://www.odooqs.com',
     "description": """
         Scan directly using scan code equipment 
