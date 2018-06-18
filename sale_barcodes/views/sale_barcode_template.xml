@@ -3,7 +3,7 @@
     <data>
         <template id="assets_backend" name="sale_barcode assets" inherit_id="web.assets_backend">
             <xpath expr="." position="inside">
-                <script type="text/javascript" src="/sale_barcode/static/src/js/sale_barcode.js"></script>
+                <script type="text/javascript" src="/sale_barcodes/static/src/js/sale_barcode.js"></script>
             </xpath>
         </template>
     </data>

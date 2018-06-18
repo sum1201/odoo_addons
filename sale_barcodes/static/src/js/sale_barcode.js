@@ -26,7 +26,7 @@ odoo.define('sale_barcode.SaleOrderBarcodeHandler', function (require) {
             this.trigger_up('activeBarcode', {
                 name: this.name,
                 fieldName: 'order_line',
-                quantity: 'product_qty',
+                quantity: 'product_uom_qty',
                 setQuantityWithKeypress: true,
                 commands: {
                     // 'O-CMD.MAIN-MENU': _.bind(this.do_action, this, 'stock_barcode.stock_barcode_action_main_menu', {clear_breadcrumbs: true}),
