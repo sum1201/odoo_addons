@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_res_users_inherit_form" model="ir.ui.view">
+        <field name="name">res.users.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="scale"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_res_users_simple_inherit_form" model="ir.ui.view">
+        <field name="name">res.users.simple.inherit.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="scale"/>
+            </field>
+        </field>
+    </record>
+</odoo>

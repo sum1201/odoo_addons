@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_scale_info_tree" model="ir.ui.view">
+        <field name="name">scale.info.tree</field>
+        <field name="model">scale.info</field>
+        <field name="type">tree</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="ip_address"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_scale_info_form" model="ir.ui.view">
+        <field name="name">scale.info.form</field>
+        <field name="model">scale.info</field>
+        <field name="type">form</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="ip_address"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="act_open_scale_info_view">
+        <field name="name">Scale</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">scale.info</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="act_open_scale_info_view_form">
+        <field name="act_window_id" ref="act_open_scale_info_view"/>
+        <field name="sequence" eval="20"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_scale_info_form"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="act_open_scale_info_view_tree">
+        <field name="act_window_id" ref="act_open_scale_info_view"/>
+        <field name="sequence" eval="10"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_scale_info_tree"/>
+    </record>
+
+    <menuitem id="menu_scale_info"
+              parent="stock.menu_stock_config_settings"
+              sequence="20"
+              action="act_open_scale_info_view"/>
+</odoo>

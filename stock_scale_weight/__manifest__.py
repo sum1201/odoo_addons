@@ -18,23 +18,29 @@
 #                                                                            #
 
 {
-    "name": "Sale Add Product By Scan",
-    "version": "10.0.1.0.0",
-    "license": "AGPL-3",
-    "depends": ["base", "barcodes", "sale"],
+    "name": "Stock Product Scale Weight",
+    "version": "10.0",
+    "depends": ["base", "stock"],
     "author": "山西清水欧度信息技术有限公司",
-    "category": "Sales",
     'website': 'http://www.odooqs.com',
+    "category": "stock",
     "description": """
-        Scan directly using scan code equipment 
+        Stock Product Scale Weight
     """,
     "data": [
-        'views/sale_barcode_template.xml',
-        'views/sale_order_view.xml',
+        'wizard/stock_set_weight_wizard_view.xml',
+        'views/scale_info_view.xml',
+        "views/stock_view.xml",
+        'views/res_users_view.xml',
+
+        'views/template.xml',
     ],
     "init_xml": [],
     'update_xml': [],
     'demo_xml': [],
+    "qweb": [
+        "static/src/xml/*.xml",
+    ],
     'installable': True,
     'active': False,
     #    'certificate': '',
