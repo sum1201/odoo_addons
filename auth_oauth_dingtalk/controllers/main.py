@@ -49,7 +49,7 @@ class OAuthLogin(Home):
     def web_client(self, s_action=None, **kw):
         ensure_db()
         user_agent = request.httprequest.user_agent.string.lower()
-
+        _logger.info("user_agent:%s" %(user_agent))
         if not request.session.uid and 'dingtalk' in user_agent:
             providers = request.env['auth.oauth.provider'].sudo().search([('auth_endpoint', 'ilike', 'dingtalk')])
             if not providers:
