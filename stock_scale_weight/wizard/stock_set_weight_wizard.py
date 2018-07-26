@@ -12,9 +12,10 @@ class StockWeightWizard(models.TransientModel):
                             default='gross_weight')
     weight = fields.Float(u'Weight')
 
-
     @api.multi
     def button_set_weight(self):
         self.ensure_one()
-        operation_id=self.env['stock.pack.operation'].browse(self.env.context.get('active_id',False))
-        operation_id.write({'qty_done':self.weight})
+        operation_id = self.env['stock.pack.operation'].browse(self.env.context.get('active_id', False))
+        operation_id.write({self.type: self.weight, })
+        operation_id.write({'qty_done': operation_id.gross_weight - operation_id.tare_weight})
+       

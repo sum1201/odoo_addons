@@ -9,3 +9,4 @@ class StockPackOperation(models.Model):
 
     gross_weight = fields.Float(u'Gross Weight')
     tare_weight = fields.Float(u'Tare_weight')
+

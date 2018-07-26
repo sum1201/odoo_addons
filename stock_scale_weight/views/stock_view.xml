@@ -11,6 +11,10 @@
                 <button string="Scale" name="%(stock_scale_weight.action_stock_weight_wizard_view)d"
                         icon="fa-balance-scale" class="oe_highlight" type="action"/>
             </xpath>
+               <xpath expr="//field[@name='pack_operation_product_ids']/tree/field[@name='qty_done']" position="before">
+                    <field name="gross_weight" />
+                    <field name="tare_weight"/>
+                </xpath>
         </field>
     </record>
 </odoo>
