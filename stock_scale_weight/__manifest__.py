@@ -34,6 +34,7 @@
         'views/res_users_view.xml',
 
         'views/template.xml',
+        'security/ir.model.access.csv'
     ],
     "init_xml": [],
     'update_xml': [],
