@@ -9,12 +9,33 @@
             <xpath expr="//field[@name='pack_operation_product_ids']/tree/button[@name='show_details']"
                    position="after">
                 <button string="Scale" name="%(stock_scale_weight.action_stock_weight_wizard_view)d"
-                        icon="fa-balance-scale" class="oe_highlight" type="action"/>
+                        icon="fa-balance-scale" class="oe_highlight" type="action" state="assigned,partially_available"/>
             </xpath>
-               <xpath expr="//field[@name='pack_operation_product_ids']/tree/field[@name='qty_done']" position="before">
-                    <field name="gross_weight" />
-                    <field name="tare_weight"/>
-                </xpath>
+            <xpath expr="//field[@name='pack_operation_product_ids']/tree/field[@name='qty_done']" position="before">
+                <field name="gross_weight"/>
+                <field name="tare_weight"/>
+            </xpath>
+
+            <xpath expr="//field[@name='pack_operation_product_ids']/kanban/field[@name='qty_done']" position="before">
+                <field name="gross_weight"/>
+                <field name="tare_weight"/>
+            </xpath>
+
+            <xpath expr="//field[@name='pack_operation_product_ids']/kanban/templates/t/div/div[last()]"
+                   position="after">
+                <div class="row">
+                    <div class="col-xs-12 text-muted">
+                        <span>
+                            <t t-esc="record.gross_weight.value"/>
+                             -
+                            <t t-esc="record.tare_weight.value"/>
+                        </span>
+                    </div>
+                    <a string="Scale" name="%(stock_scale_weight.action_stock_weight_wizard_view)d"
+                        class="fa fa-balance-scale pull-right"  type="action" state="assigned,partially_available"/>
+
+                </div>
+            </xpath>
         </field>
     </record>
 </odoo>

@@ -18,4 +18,3 @@ class StockWeightWizard(models.TransientModel):
         operation_id = self.env['stock.pack.operation'].browse(self.env.context.get('active_id', False))
         operation_id.write({self.type: self.weight, })
         operation_id.write({'qty_done': operation_id.gross_weight - operation_id.tare_weight})
-       
