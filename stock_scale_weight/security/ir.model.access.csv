@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_scale_info_user,user.scale.info,model_scale_info,base.group_user,1,0,0,0
+access_scale_info_manager,manager.scale.info,model_scale_info,stock.group_stock_user,1,0,0,0
