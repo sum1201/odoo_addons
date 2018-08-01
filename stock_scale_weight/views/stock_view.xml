@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_stock_picking_inherit_form" model="ir.ui.view">
+        <field name="name">stock.picking.inherit.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='pack_operation_product_ids']/tree/button[@name='show_details']"
+                   position="after">
+                <button string="Scale" name="%(stock_scale_weight.action_stock_weight_wizard_view)d"
+                        icon="fa-balance-scale" class="oe_highlight" type="action"
+                        states="assigned,partially_available"/>
+            </xpath>
+            <xpath expr="//field[@name='pack_operation_product_ids']/tree/field[@name='qty_done']" position="before">
+                <field name="gross_weight"/>
+                <field name="tare_weight"/>
+            </xpath>
+
+            <xpath expr="//field[@name='pack_operation_product_ids']/kanban/field[@name='qty_done']" position="before">
+                <field name="gross_weight"/>
+                <field name="tare_weight"/>
+            </xpath>
+
+            <xpath expr="//field[@name='pack_operation_product_ids']/kanban/templates/t/div/div[last()]"
+                   position="after">
+                <div class="row">
+                    <div class="col-xs-12 text-muted">
+                        <span>
+                            <t t-esc="record.gross_weight.value"/>
+                            -
+                            <t t-esc="record.tare_weight.value"/>
+                        </span>
+                    </div>
+                    <a type="button">
+                        <button string="Scale" name="%(stock_scale_weight.action_stock_weight_wizard_view)d"
+                                class="fa fa-balance-scale pull-right fa-refresh" type="action"
+                                states="assigned,partially_available"/>
+                    </a>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

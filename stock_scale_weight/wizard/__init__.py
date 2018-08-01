@@ -1,0 +1,1 @@
+from . import stock_set_weight_wizard

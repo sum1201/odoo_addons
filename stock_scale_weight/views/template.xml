@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<odoo>
+    <template id="assets_backend" name="scale assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/stock_scale_weight/static/src/js/scale_device.js"></script>
+            <script type="text/javascript" src="/stock_scale_weight/static/src/js/scale_widget.js"></script>
+
+        </xpath>
+    </template>
+</odoo>

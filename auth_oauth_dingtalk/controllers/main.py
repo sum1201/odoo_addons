@@ -16,12 +16,12 @@ from odoo import registry as registry_get
 from odoo.addons.auth_oauth.controllers.main import OAuthLogin as Home, OAuthController as Controller
 from odoo.addons.web.controllers.main import db_monodb, ensure_db, set_cookie_and_redirect, login_and_redirect
 
-import urllib
+# import urllib
 import requests
 
 from werkzeug import urls
 
-from odoo.tools import ustr, consteq, frozendict, pycompat, unique
+# from odoo.tools import ustr, consteq, frozendict, pycompat, unique
 
 _logger = logging.getLogger(__name__)
 
@@ -49,7 +49,7 @@ class OAuthLogin(Home):
     def web_client(self, s_action=None, **kw):
         ensure_db()
         user_agent = request.httprequest.user_agent.string.lower()
-
+        _logger.info("user_agent:%s" %(user_agent))
         if not request.session.uid and 'dingtalk' in user_agent:
             providers = request.env['auth.oauth.provider'].sudo().search([('auth_endpoint', 'ilike', 'dingtalk')])
             if not providers:
@@ -67,7 +67,7 @@ class OAuthLogin(Home):
             return super(OAuthLogin, self).web_client(s_action, **kw)
 
     def redirect_dingtalk(self, url, provider_id):
-        url = pycompat.to_text(url).strip()
+        # url = pycompat.to_text(url).strip()
         if urls.url_parse(url, scheme='http').scheme not in ('http', 'https'):
             url = u'http://' + url
         url = url.replace("'", "%27").replace("<", "%3C")
@@ -152,10 +152,13 @@ class OAuthController(Controller):
         )
         url = "https://oapi.dingtalk.com/sns/gettoken"
 
-        link = "%s?%s" % (url, werkzeug.url_encode(params))
-        urlRequest = urllib.request.Request(link)
-        urlResponse = urllib.request.urlopen(urlRequest).read()
-        result = json.loads(str(urlResponse, encoding='utf-8'))
+        # link = "%s?%s" % (url, werkzeug.url_encode(params))
+        # urlRequest = urllib.request.Request(link)
+        # urlResponse = urllib.request.urlopen(urlRequest).read()
+
+        result = requests.get(url, params).text
+        result = json.loads(result)
+        # result = json.loads(str(urlResponse, encoding='utf-8'))
         if result['errcode'] == 0:
             return result['access_token']
         else:
@@ -166,6 +169,7 @@ class OAuthController(Controller):
         body = {"tmp_auth_code": code}
         url = 'https://oapi.dingtalk.com/sns/get_persistent_code'
         link = "%s?%s" % (url, werkzeug.url_encode(params))
+
 
         result = requests.post(link, json=body, ).text
         result = json.loads(result)

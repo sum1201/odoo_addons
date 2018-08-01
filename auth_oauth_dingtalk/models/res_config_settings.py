@@ -5,7 +5,7 @@ import odoo.addons.decimal_precision as dp
 
 
 class ResConfigSettings(models.TransientModel):
-    _inherit = 'res.config.settings'
+    _inherit = "base.config.settings"
 
     dingtalk_app_id=fields.Char(u'钉钉appid')
     dingtalk_qr_appSecret=fields.Char(u'钉钉扫码appSecret')
@@ -13,22 +13,41 @@ class ResConfigSettings(models.TransientModel):
     dingtalk_corpSecret=fields.Char(u'钉钉应用corpSecret')
 
     @api.multi
-    def set_values(self):
-        super(ResConfigSettings, self).set_values()
-        params = self.env['ir.config_parameter'].sudo()
-        params.set_param('dingtalk.appid', self[0].dingtalk_app_id)
-        params.set_param('dingtalk.qr.appsecret',self[0].dingtalk_qr_appSecret)
-        params.set_param('dingtalk.corpid', self[0].dingtalk_corpid)
-        params.set_param('dingtalk.corpSecret', self[0].dingtalk_corpSecret)
+    def set_dingtalk_app_id(self):
+        self.env['ir.config_parameter'].set_param('dingtalk.appid', self[0].dingtalk_app_id)
 
-    @api.model
-    def get_values(self):
-        res = super(ResConfigSettings, self).get_values()
-        params = self.env['ir.config_parameter'].sudo()
-        res.update(
-            dingtalk_app_id=params.get_param('dingtalk.appid', default=''),
-            dingtalk_qr_appSecret=params.get_param('dingtalk.qr.appsecret', default=''),
-            dingtalk_corpSecret=params.get_param('dingtalk.corpSecret', default=''),
-            dingtalk_corpid=params.get_param('dingtalk.corpid',default='')
-        )
-        return res
+    @api.multi
+    def set_dingtalk_qr_appSecret(self):
+        self.env['ir.config_parameter'].set_param('dingtalk.qr.appsecret', self[0].dingtalk_qr_appSecret)
+
+    @api.multi
+    def set_dingtalk_corpid(self):
+        self.env['ir.config_parameter'].set_param('dingtalk.corpid', self[0].dingtalk_corpid)
+
+    @api.multi
+    def set_dingtalk_corpSecret(self):
+        self.env['ir.config_parameter'].set_param('dingtalk.corpSecret', self[0].dingtalk_corpSecret)
+
+    @api.multi
+    def get_default_dingtalk_app_id(self, fields):
+        params = self.env['ir.config_parameter']
+        appid = params.get_param('dingtalk.appid', default='')
+        return {'dingtalk_app_id': appid}
+
+    @api.multi
+    def get_default_dingtalk_qr_appSecret(self, fields):
+        params = self.env['ir.config_parameter']
+        appsecret = params.get_param('dingtalk.qr.appsecret', default='')
+        return {'dingtalk_qr_appSecret': appsecret}
+
+    @api.multi
+    def get_default_dingtalk_corpid(self, fields):
+        params = self.env['ir.config_parameter']
+        corpid = params.get_param('dingtalk.corpid', default='')
+        return {'dingtalk_corpid': corpid}
+
+    @api.multi
+    def get_default_dingtalk_corpSecret(self, fields):
+        params = self.env['ir.config_parameter']
+        corpSecret = params.get_param('dingtalk.corpSecret', default='')
+        return {'dingtalk_corpSecret': corpSecret}
