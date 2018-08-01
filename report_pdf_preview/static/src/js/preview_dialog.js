@@ -20,10 +20,8 @@
 odoo.define('report_pdf_preview.PreviewDialog', function (require) {
 "use strict";
 
-var ajax = require('web.ajax');
 var core = require('web.core');
 var framework = require('web.framework');
-
 var Widget = require('web.Widget');
 
 var PreviewHandler = require('report_pdf_preview.PreviewHandler');
@@ -33,11 +31,6 @@ var QWeb = core.qweb;
 var _t = core._t;
 
 var PreviewDialog = Widget.extend({
-	cssLibs: [
-    ],
-    jsLibs: [
-        '/report_pdf_preview/static/lib/printThis/printThis.js',
-    ],
 	init: function(parent, generator, url, mimetype, extension, title) {
 		this._super(parent);
         this._opened = $.Deferred();
@@ -45,39 +38,26 @@ var PreviewDialog = Widget.extend({
         this.url = url;
         this.mimetype = mimetype;
         this.extension = extension;
+		this.$modal = $(QWeb.render('PreviewDialog', {title: this.title, url: this.url}));
+        this.$modal.on('hidden.bs.modal', _.bind(this.destroy, this));
+        this.$modal.find('.preview-maximize').on('click', _.bind(this.maximize, this));
+        this.$modal.find('.preview-minimize').on('click', _.bind(this.minimize, this));
+        this.$modal.find('.preview-print').on('click', _.bind(this.print, this));
 		this.generator = generator;
 		this.generator.widget = this;
 	},
-	 willStart: function() {
-		var self = this; 
-		return $.when(ajax.loadLibs(this), this._super()).then(function() {
-    		self.$modal = $(QWeb.render('PreviewDialog', {title: self.title, url: self.url}));
-		});
-    },
-    start: function() {
-    	var self = this;
-        return this._super().then(function() {
-        	self.$modal.on('hidden.bs.modal', _.bind(self.destroy, self));
-        	self.$modal.find('.preview-maximize').on('click', _.bind(self.maximize, self));
-        	self.$modal.find('.preview-minimize').on('click', _.bind(self.minimize, self));
-        	self.$modal.find('.preview-print').on('click', _.bind(self.print, self));
-        });
-    },
     renderElement: function() {
         this._super();
         var self = this;
-        this.generator.createPreview(this.url, this.mimetype,
-        		this.extension, this.title).then(function($content) {
-        	self.$el.replaceWith($content);        	
-        	self.setElement($content);
-        	self.$modal.find('.preview-print').toggle($content.hasClass('printable'));
+        this.generator.createPreview(this.url, this.mimetype, this.extension, this.title).then(function($content) {
+            self.setElement($("<div/>").addClass("modal-body preview-body").append($content));
+            self.$modal.find('.preview-print').toggle($content.hasClass('printable'));
         });
 	},
     open: function() {
         var self = this;
         $('.tooltip').remove();
-        this.appendTo($('<div/>')).then(function() {
-        	self.$modal.find(".modal-body").append(self.$el);
+        this.replace(this.$modal.find(".modal-body")).then(function() {
             self.$modal.modal('show');
             self._opened.resolve();
         });
@@ -92,7 +72,7 @@ var PreviewDialog = Widget.extend({
     minimize: function(e) {
     	this.$modal.find('.preview-maximize').toggle();
     	this.$modal.find('.preview-minimize').toggle();
-    	this.$modal.removeClass("modal-fullscreen");
+    	this.$modal .removeClass("modal-fullscreen");
     },
     print: function(e) {
     	var $printable = this.$modal.find('.printable');
@@ -116,32 +96,25 @@ var PreviewDialog = Widget.extend({
     		});
     	}
     },
-    opened: function (handler) {
-        return (handler)? this._opened.then(handler) : this._opened;
-    },
     close: function() {
-    	this.destroy();
+        this.$modal.modal('hide');
     },
-    destroy: function (reason) {
-        if (!this.__closed) {
-            this.__closed = true;
-            this.trigger("closed", reason);
-        }
-        if (this.isDestroyed()) {
+    destroy: function(reason) {
+        $('.tooltip').remove();
+        if(this.isDestroyed()) {
             return;
         }
+        this.trigger("closed", reason);
         this._super();
-
-        $('.tooltip').remove();
-        if (this.$modal) {
-            this.$modal.modal('hide');
-            this.$modal.remove();
-        }
-        var modals = $('body > .modal').filter(':visible');
-        if (modals.length) {
-            modals.last().focus();
-            $('body').addClass('modal-open');
-        }
+        this.$modal.modal('hide');
+        this.$modal.remove();
+        setTimeout(function () {
+            var modals = $('body > .modal').filter(':visible');
+            if(modals.length) {
+                modals.last().focus();
+                $('body').addClass('modal-open');
+            }
+        }, 0);
     }
 });
 

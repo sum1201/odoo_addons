@@ -36,7 +36,7 @@ var BaseHandler = core.Class.extend({
 		return false;
 	},
     createHtml: function(url, mimetype, extension, title) {
-    	return $.when();
+    	$.when();
     },
 });
 
@@ -51,7 +51,7 @@ var PDFHandler = BaseHandler.extend({
     	var result = $.Deferred();	
     	var viewerUrlTempalte = _.template('/report_pdf_preview/static/lib/PDFjs/web/viewer.html?file=<%= url %>');
 		result.resolve($(QWeb.render('ViewerJSFrame', {url: viewerUrlTempalte({url})})));
-		return result;
+		return $.when(result);
 	},    
 });
 
@@ -68,7 +68,7 @@ var OpenOfficeHandler = BaseHandler.extend({
     	var result = $.Deferred();	
     	var viewerUrlTempalte = _.template('/report_pdf_preview/static/lib/ViewerJS/index.html#<%= url %>');
 		result.resolve($(QWeb.render('ViewerJSFrame', {url: viewerUrlTempalte({url})})));
-		return result;
+		return $.when(result);
     },
 });
 
@@ -76,6 +76,6 @@ return {
 	BaseHandler: BaseHandler,
 	PDFHandler: PDFHandler,
 	OpenOfficeHandler: OpenOfficeHandler,
-};
+}
 
 });

@@ -47,13 +47,8 @@ var PreviewGenerator = core.Class.extend({
 		if(matchedHandler) {
 			return matchedHandler.createHtml(url, mimetype, extension, title);
 		} else {
-			var $content = $.Deferred();
-			$content.resolve($(QWeb.render('UnsupportedContent', {
-				url: url, mimetype: mimetype || _t('Unknown'),
-				extension: extension || _t('Unknown'),
-				title: title || _t('Unknown')
-			})));
-			return $content;
+			return $.when($.Deferred().resolve($(QWeb.render('UnsupportedContent',
+					{url: url, mimetype: mimetype || _t('Unknown'), extension: extension || _t('Unknown'), title: title || _t('Unknown')}))));
 		}
 	}
 });
