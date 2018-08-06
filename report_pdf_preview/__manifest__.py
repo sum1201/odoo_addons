@@ -35,6 +35,7 @@
     "qweb": [
         "static/src/xml/*.xml",
     ],
+    'images': ['static/description/banner.jpg'],
     'installable': True,
     'active': False,
     #    'certificate': '',

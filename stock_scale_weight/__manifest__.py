@@ -42,6 +42,7 @@
     "qweb": [
         "static/src/xml/*.xml",
     ],
+    'images': ['static/description/scale_01.jpg'],
     'installable': True,
     'active': False,
     #    'certificate': '',

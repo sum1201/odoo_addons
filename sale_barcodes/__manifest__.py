@@ -35,6 +35,7 @@
     "init_xml": [],
     'update_xml': [],
     'demo_xml': [],
+    'images': ['static/description/barcode_01.jpg'],
     'installable': True,
     'active': False,
     #    'certificate': '',
