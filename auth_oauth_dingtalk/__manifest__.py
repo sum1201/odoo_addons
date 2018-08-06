@@ -33,6 +33,7 @@
     "init_xml": [],
     'update_xml': [],
     'demo_xml': [],
+    'images': ['static/description/banner.jpg'],
     'installable': True,
     'active': False,
     #    'certificate': '',
