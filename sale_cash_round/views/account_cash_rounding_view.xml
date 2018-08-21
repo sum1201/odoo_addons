@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_account_cash_rounding_inherit_form" model="ir.ui.view">
+        <field name="name">account.cash.rounding.inherit.form</field>
+        <field name="model">account.cash.rounding</field>
+        <field name="inherit_id" ref="account.rounding_form_view"/>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <field name="rounding_method" position="after">
+                <field name="product_id"/>
+            </field>
+        </field>
+    </record>
+</odoo>
