@@ -7,7 +7,12 @@ import odoo.addons.decimal_precision as dp
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    cash_rounding_id = fields.Many2one('account.cash.rounding', string=u'抹零方式',
+    def _get_default_cash_rounding_id(self):
+        round_ids=self.env['account.cash.rounding'].search([],limit=1)
+        if round_ids:
+            return round_ids[0]
+
+    cash_rounding_id = fields.Many2one('account.cash.rounding', string=u'抹零方式',default=_get_default_cash_rounding_id,
                                        readonly=True, states={'draft': [('readonly', False)]},)
 
     @api.onchange('order_line','cash_rounding_id')
