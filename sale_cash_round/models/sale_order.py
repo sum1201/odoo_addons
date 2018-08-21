@@ -21,7 +21,7 @@ class SaleOrder(models.Model):
         if lines_to_remove:
             self.order_line -= lines_to_remove
 
-        if self.cash_rounding_id:
+        if self.cash_rounding_id and self.order_line:
             rounding_amount = self.cash_rounding_id.compute_difference(self.currency_id, self.amount_total)
             if not self.currency_id.is_zero(rounding_amount):
                 rounding_line = self.env['sale.order.line'].new({
