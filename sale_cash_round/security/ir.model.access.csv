@@ -1,2 +1,2 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_jewelry_metal_price,jewelry.metal.price,model_jewelry_metal_price,jewelry_product.group_jewelry_metal_price,1,1,1,1
+access_account_cash_rounding_user,jewelry.account.cash.rounding,account.model_account_cash_rounding,sales_team.group_sale_salesman,1,0,0,0
