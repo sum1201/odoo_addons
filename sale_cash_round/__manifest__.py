@@ -26,6 +26,7 @@
     "description": """
     """,
     "data":[
+        'security/ir.model.access.csv',
         'views/account_cash_rounding_view.xml',
         'views/sale_order_view.xml',
     ],
