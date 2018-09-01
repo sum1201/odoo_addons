@@ -2,6 +2,9 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import except_orm, Warning, RedirectWarning,AccessDenied
 import odoo.addons.decimal_precision as dp
+import logging
+_logger = logging.getLogger(__name__)
+
 
 class ResUsers(models.Model):
     _inherit = 'res.users'
@@ -9,6 +12,7 @@ class ResUsers(models.Model):
     @api.model
     def auth_oauth_dingtalk(self,provide_id,userid):
         user_ids=self.search([('oauth_provider_id','=',provide_id),('oauth_uid','=',userid)])
+        _logger.info("user: %s",user_ids)
         if not user_ids or len(user_ids)>1:
             return AccessDenied
         return (self.env.cr.dbname, user_ids[0].login, userid)
