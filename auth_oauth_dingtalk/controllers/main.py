@@ -96,6 +96,7 @@ class OAuthController(Controller):
         access_token = self.get_access_token()
         userid = self.get_userid_by_unionid(access_token, userinfo['unionid'])
         try:
+            _logger.info("cre:%s",provider_id,userid)
             credentials = request.env['res.users'].sudo().auth_oauth_dingtalk(provider_id, userid)
             _logger.info("credentials: %s",credentials)
             url = '/web'
