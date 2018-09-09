@@ -8,10 +8,11 @@
         <field name="arch" type="xml">
             <field name="payment_term_id" position="after">
                 <field name="cash_rounding_id"/>
+                <field name="auto_cash_round" attrs="{'invisible': [('cash_rounding_id','=',False )]}"/>
             </field>
 
             <xpath expr="//field[@name='order_line']/tree" position="inside">
-                <field name="is_rounding_line" invisible="1" />
+                <field name="is_rounding_line" invisible="1"/>
             </xpath>
 
             <xpath expr="//field[@name='order_line']/form" position="after">
