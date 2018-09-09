@@ -14,7 +14,7 @@ class SaleOrder(models.Model):
 
     cash_rounding_id = fields.Many2one('account.cash.rounding', string=u'抹零方式',default=_get_default_cash_rounding_id,
                                        readonly=True, states={'draft': [('readonly', False)]},)
-    auto_cash_round=fields.Boolean(u'自动抹零')
+    auto_cash_round=fields.Boolean(u'自动抹零',default=True,readonly=True, states={'draft': [('readonly', False)]},)
 
     @api.onchange('order_line','cash_rounding_id','auto_cash_round')
     def _onchange_cash_rounding(self):
