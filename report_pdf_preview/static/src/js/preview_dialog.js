@@ -33,11 +33,7 @@ var QWeb = core.qweb;
 var _t = core._t;
 
 var PreviewDialog = Widget.extend({
-	cssLibs: [
-    ],
-    jsLibs: [
-        '/report_pdf_preview/static/lib/printThis/printThis.js',
-    ],
+
 	init: function(parent, generator, url, mimetype, extension, title) {
 		this._super(parent);
         this._opened = $.Deferred();

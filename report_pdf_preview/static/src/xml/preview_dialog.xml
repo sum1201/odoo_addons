@@ -18,23 +18,24 @@
 -->
 
 <templates>
-	<div t-name="PreviewDialog" class="modal fade" tabindex="-1" data-backdrop="static" role="dialog" aria-hidden="true" t-att-id="_.uniqueId('modal_')">
-	    <div class="modal-dialog modal-lg">
-	        <div class="modal-content">
-	            <div class="modal-header preview-header">
-	                <button type="button" class="preview-dialog-btn preview-close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-	                <button type="button" class="preview-dialog-btn preview-maximize" aria-hidden="true"><i class="fa fa-desktop"></i></button>
-	                <button type="button" class="preview-dialog-btn preview-minimize" aria-hidden="true"><i class="fa fa-minus"></i></button>
-	                <a class="preview-dialog-btn preview-download" aria-hidden="true" t-att-href="url"><i class="fa fa-download"></i></a>
-	                <button type="button" class="preview-dialog-btn preview-print" aria-hidden="true"><i class="fa fa-print"></i></button>
-	                <h4 class="modal-title preview-title"><t t-raw="title"/></h4>
-	            </div>
-	            <div class="modal-body preview-body">
-	            </div>
-	            <div class="modal-footer preview-footer">
-	            	<button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
-	            </div>
-	        </div>
-	    </div>
-	</div>
+    <div t-name="PreviewDialog" class="modal fade" tabindex="-1" data-backdrop="static" role="dialog" aria-hidden="true"
+         t-att-id="_.uniqueId('modal_')">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <header class="modal-header">
+
+                    <h4 class="modal-title">
+                        <t t-raw="title"/>
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span>&amp;times;</span>
+                    </button>
+                </header>
+                <main class="modal-body preview-body"/>
+                <footer class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                </footer>
+            </div>
+        </div>
+    </div>
 </templates>
