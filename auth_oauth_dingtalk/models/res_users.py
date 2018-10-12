@@ -18,9 +18,9 @@ class ResUsers(models.Model):
         return (self.env.cr.dbname, user_ids[0].login, userid)
 
     @api.model
-    def check_credentials(self, password):
+    def _check_credentials(self, password):
         try:
-            return super(ResUsers, self).check_credentials(password)
+            return super(ResUsers, self)._check_credentials(password)
         except AccessDenied:
             res = self.sudo().search([('id', '=', self.env.uid), ('oauth_uid', '=', password)])
             if not res:
