@@ -33,7 +33,6 @@
                 </header>
                 <main class="modal-body preview-body"/>
                 <footer class="modal-footer">
-                    <button type="button" class="btn btn-primary preview-print">Print</button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
                 </footer>
             </div>
