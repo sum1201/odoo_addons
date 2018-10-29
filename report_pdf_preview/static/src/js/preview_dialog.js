@@ -57,6 +57,7 @@ var PreviewDialog = Widget.extend({
         	self.$modal.find('.preview-maximize').on('click', _.bind(self.maximize, self));
         	self.$modal.find('.preview-minimize').on('click', _.bind(self.minimize, self));
         	self.$modal.find('.preview-print').on('click', _.bind(self.print, self));
+
         });
     },
     renderElement: function() {
@@ -66,7 +67,7 @@ var PreviewDialog = Widget.extend({
         		this.extension, this.title).then(function($content) {
         	self.$el.replaceWith($content);        	
         	self.setElement($content);
-        	self.$modal.find('.preview-print').toggle($content.hasClass('printable'));
+        	// self.$modal.find('.preview-print').toggle($content.hasClass('printable'));
         });
 	},
     open: function() {
@@ -96,8 +97,8 @@ var PreviewDialog = Widget.extend({
     	setTimeout(function() {
     		framework.unblockUI();
     	}, ($printable.data('print-delay') || 333) * 0.95);
-    	if(this.$modal.find('.print-content').length) {
-    		this.$modal.find('.print-content').printThis({
+    	if(this.$modal.find('.page').length) {
+    		this.$modal.find('.page').printThis({
     			importCSS: true,
     			importStyle: true,
     			printDelay: $printable.data('print-delay') || 333,
