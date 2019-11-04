@@ -32,6 +32,7 @@
     'update_xml': [],
     'demo_xml': [],
     'installable': True,
+    "license": "AGPL-3",
     'active': False,
     #    'certificate': '',
 }

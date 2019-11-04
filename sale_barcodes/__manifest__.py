@@ -19,7 +19,7 @@
 
 {
     "name": "Sale Add Product By Scan",
-    "version": "11.0.1.0.0",
+    "version": "1.1.0",
     "license": "AGPL-3",
     "depends": ["base", "barcodes", "sale"],
     "author": "山西清水欧度信息技术有限公司",

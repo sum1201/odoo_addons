@@ -19,8 +19,9 @@
 
 {
     "name": "销售金额抹零",
-    "version": "1.0",
+    "version": "1.1",
     "depends": ["sale","account"],
+    "license": "AGPL-3",
     "author": "山西清水欧度信息技术有限公司",
     "category": "account",
     "description": """
