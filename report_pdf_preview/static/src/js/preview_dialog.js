@@ -26,7 +26,6 @@ var framework = require('web.framework');
 
 var Widget = require('web.Widget');
 
-var PreviewHandler = require('report_pdf_preview.PreviewHandler');
 var PreviewGenerator = require('report_pdf_preview.PreviewGenerator');
 
 var QWeb = core.qweb;
