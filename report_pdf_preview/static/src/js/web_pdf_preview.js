@@ -2,17 +2,9 @@ odoo.define('report_pdf_preview.report', function (require) {
     'use strict';
 
     var ActionManager = require('web.ActionManager');
-    var core = require('web.core');
-    var crash_manager = require('web.crash_manager');
     var framework = require('web.framework');
 
     var PreviewDialog = require('report_pdf_preview.PreviewDialog');
-    var PreviewGenerator = require('report_pdf_preview.PreviewGenerator');
-
-    var _t = core._t;
-    var _lt = core._lt;
-
-    var wkhtmltopdf_state;
 
     ActionManager.include({
         _executeReportAction: function (action, options) {
