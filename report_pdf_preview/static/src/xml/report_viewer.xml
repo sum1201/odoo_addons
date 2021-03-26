@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+    <div t-name="report_pdf_preview.ReportViewer" class="o_ReportViewer">
+        <iframe t-att-src="url" class="o_ReportViewer_iframe"/>
+    </div>
+</templates>
