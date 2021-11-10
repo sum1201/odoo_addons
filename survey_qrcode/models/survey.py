@@ -17,3 +17,13 @@ class Survey(models.Model):
             survey_start_url = werkzeug.urls.url_join(base_url, survey_id.get_start_url()) if survey_id else False
             qrcode.make(survey_start_url, box_size=4).save(data, optimise=True, format='PNG')
             survey_id.qrcode = base64.b64encode(data.getvalue()).decode()
+
+    def action_result_survey(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'view_mode': 'form',
+            'res_model': 'survey.result.wizard',
+            'target': 'new',
+        }
+        return action

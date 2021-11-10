@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="survey_reuslt_wizard_form" model="ir.ui.view">
+            <field name="name">survey.result.wizard</field>
+            <field name="model">survey.result.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="type"/>
+                        </group>
+                        <group>
+                            <label for="date_begin" string="起始日期"
+                                       attrs="{'invisible': [('type', '!=', 'manual')]}"
+                                />
+                                <div class="o_row" attrs="{'invisible': [('type', '!=', 'manual')]}">
+                                    <field name="date_begin" widget="daterange" nolabel="1" class="oe_inline"
+                                           attrs="{'required': [('type', '=', 'manual')]}"
+                                           options="{'related_end_date': 'date_end'}"/>
+                                    <i class="fa fa-long-arrow-right mx-2" aria-label="Arrow icon" title="Arrow"/>
+                                    <field name="date_end" widget="daterange" nolabel="1" class="oe_inline"
+                                           attrs="{'required': [('type', '=', 'manual')]}"
+                                           options="{'related_start_date': 'date_begin'}"/>
+                                </div>
+                        </group>
+
+                    </group>
+                    <footer>
+                        <button string="确定" name="button_done" type="object" class="oe_highlight"/>
+                        <button string="取消" class="btn btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="survey_result_wizard_act_window" model="ir.actions.act_window">
+            <field name="name">查看调查结果</field>
+            <field name="res_model">survey.result.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

@@ -11,6 +11,8 @@
     'depends': ['survey'],
     "init_xml": [],
     "data": [
+        'security/ir.model.access.csv',
+        'wizards/survey_result_wizard_view.xml',
         'views/survey_views.xml'
     ],
     'demo_xml': [],
