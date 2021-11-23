@@ -21,6 +21,7 @@ class Survey(models.Model):
     def action_result_survey(self):
         self.ensure_one()
         return {
+            'name': '调查结果向导',
             'type': 'ir.actions.act_window',
             'view_mode': 'form',
             'res_model': 'survey.result.wizard',

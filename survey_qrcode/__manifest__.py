@@ -13,7 +13,8 @@
     "data": [
         'security/ir.model.access.csv',
         'wizards/survey_result_wizard_view.xml',
-        'views/survey_views.xml'
+        'views/survey_views.xml',
+        'views/assets.xml'
     ],
     'demo_xml': [],
     'qweb': [],

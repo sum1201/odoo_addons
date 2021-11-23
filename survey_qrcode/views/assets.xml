@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="survey_assets" inherit_id="survey.survey_assets">
+        <xpath expr="." position="inside">
+            <link href="/survey_qrcode/static/src/css/survey_print.css" rel="stylesheet" type="text/css"/>
+        </xpath>
+    </template>
+
+</odoo>
