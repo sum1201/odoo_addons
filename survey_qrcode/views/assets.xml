@@ -6,4 +6,13 @@
         </xpath>
     </template>
 
+
+    <template id="survey_page_statistics_inner" inherit_id="survey.survey_page_statistics_inner">
+        <xpath expr="//div[@class='o_survey_session_leaderboard mb-5 mt-1']" position="attributes">
+            <attribute name="class">o_survey_session_leaderboard mb-5 mt-1 d-print-none</attribute>
+        </xpath>
+        <xpath expr="//div[@class='card d-print-none']" position="attributes">
+            <attribute name="class">card</attribute>
+        </xpath>
+    </template>
 </odoo>
