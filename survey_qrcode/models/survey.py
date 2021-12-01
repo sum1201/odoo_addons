@@ -18,6 +18,31 @@ class Survey(models.Model):
             qrcode.make(survey_start_url, box_size=4).save(data, optimise=True, format='PNG')
             survey_id.qrcode = base64.b64encode(data.getvalue()).decode()
 
+    def _prepare_statistics(self, user_input_lines=None):
+        result = super(Survey, self)._prepare_statistics(user_input_lines)
+        if user_input_lines:
+            user_input_domain = [
+                ('survey_id', 'in', self.ids),
+                ('id', 'in', user_input_lines.mapped('user_input_id').ids)
+            ]
+        else:
+            user_input_domain = [
+                ('survey_id', 'in', self.ids),
+                ('state', '=', 'done'),
+                ('test_entry', '=', False)
+            ]
+        scoring_data = self.env['survey.user_input'].sudo().read_group(
+            user_input_domain, ['scoring_percentage'], ['scoring_percentage'])
+        scoring_total = 0
+        for scoring_data_item in scoring_data:
+            scoring_total += scoring_data_item['scoring_percentage']
+        if scoring_data:
+            global_scoring_percentage = round(scoring_total  / len(scoring_data), 2)
+        else:
+            global_scoring_percentage = 0.0
+        result.update({'global_scoring_percentage': global_scoring_percentage})
+        return result
+
     def action_result_survey(self):
         self.ensure_one()
         return {
