@@ -1,6 +1,8 @@
 from odoo import fields, models, api
 import io, base64
 import werkzeug
+import logging
+_logger = logging.getLogger(__name__)
 
 
 class Survey(models.Model):
@@ -34,10 +36,14 @@ class Survey(models.Model):
         scoring_data = self.env['survey.user_input'].sudo().read_group(
             user_input_domain, ['scoring_percentage'], ['scoring_percentage'])
         scoring_total = 0
+        scoring_count = 0
         for scoring_data_item in scoring_data:
-            scoring_total += scoring_data_item['scoring_percentage']
+            scoring_total += scoring_data_item['scoring_percentage'] * scoring_data_item['scoring_percentage_count']
+            scoring_count += scoring_data_item['scoring_percentage_count']
         if scoring_data:
-            global_scoring_percentage = round(scoring_total  / len(scoring_data), 2)
+            _logger.info(scoring_total)
+            _logger.info(scoring_data)
+            global_scoring_percentage = round(scoring_total / scoring_count, 2)
         else:
             global_scoring_percentage = 0.0
         result.update({'global_scoring_percentage': global_scoring_percentage})
