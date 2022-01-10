@@ -8,7 +8,7 @@
     'description': """
     """,
     'license': 'OPL-1',
-    'depends': ['survey', 'hr'],
+    'depends': ['survey'],
     "init_xml": [],
     "data": [
         'security/ir.model.access.csv',
