@@ -20,9 +20,9 @@
             <attribute name="class">survey_graph d-print-none</attribute>
         </xpath>
 
-        <xpath expr="//div[contains(@t-if, 'scoring_with_answers')]/h2" position="after">
-            <div>平均分: <mark class="font-weight-bold"><t t-esc="survey_data['global_scoring_percentage']"></t>%</mark></div>
-        </xpath>
+<!--        <xpath expr="//div[contains(@t-if, 'scoring_with_answers')]/h2" position="after">-->
+<!--            <div>平均分: <mark class="font-weight-bold"><t t-esc="survey_data['global_scoring_percentage']"></t>%</mark></div>-->
+<!--        </xpath>-->
     </template>
 
     <template id="question_result_choice" inherit_id="survey.question_result_choice">
