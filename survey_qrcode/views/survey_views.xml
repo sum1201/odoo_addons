@@ -12,4 +12,33 @@
             </field>
         </record>
 
+    <record id="survey_inheirt_kanban" model="ir.ui.view">
+        <field name="name">survey.survey.inherit.kanban</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_kanban"/>
+        <field name="arch" type="xml">
+            <field name="success_ratio" position="after">
+                <field name="create_uid"/>
+                <field name="answer_score_avg"/>
+            </field>
+            <xpath expr="//div[@class='container o_kanban_card_content']" position="inside">
+                <div class="row mt-4 ml-5">
+                <div class="col-4 p-0 " t-if="record.scoring_type.raw_value != 'no_scoring'">
+                    <a name="action_survey_user_input_completed" type="object" class="d-flex flex-column align-items-center">
+                        <span class="font-weight-bold"> <field name="create_uid"/></span>
+                        <span class="text-muted">创建人</span>
+                    </a>
+                </div>
+                <div class="col-4 p-0 border-left" t-if="record.scoring_type.raw_value != 'no_scoring'">
+                    <a name="action_survey_user_input_completed" type="object" class="d-flex flex-column align-items-center">
+                        <span class="font-weight-bold"> <t t-esc="Math.round(record.answer_score_avg.raw_value)"/> %</span>
+                        <span class="text-muted">平均分</span>
+                    </a>
+                </div>
+                </div>
+            </xpath>
+
+        </field>
+    </record>
+
 </odoo>

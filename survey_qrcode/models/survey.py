@@ -9,6 +9,7 @@ class Survey(models.Model):
     _inherit = 'survey.survey'
 
     qrcode = fields.Binary('二维码', compute='_compute_qrcode')
+    success_ratio_average = fields.Integer("平均分", compute="_compute_survey_statistic")
 
     @api.depends('access_token')
     def _compute_qrcode(self):
@@ -36,7 +37,7 @@ class Survey(models.Model):
                                               lazy=False)
         for item in read_group_res:
             stat[item['survey_id'][0]]['answer_count'] += item['__count']
-            stat[item['survey_id'][0]]['answer_score_avg_total'] += item['scoring_percentage']
+            stat[item['survey_id'][0]]['answer_score_avg_total'] += item['scoring_percentage'] * item['__count']
             if item['state'] == 'done':
                 stat[item['survey_id'][0]]['answer_done_count'] += item['__count']
             if item['scoring_success']:
@@ -80,16 +81,16 @@ class Survey(models.Model):
         result.update({'global_scoring_percentage': global_scoring_percentage})
         return result
 
-    def action_result_survey(self):
-        self.ensure_one()
-        return {
-            'name': '调查结果向导',
-            'type': 'ir.actions.act_window',
-            'view_mode': 'form',
-            'res_model': 'survey.result.wizard',
-            'target': 'new',
-        }
-        return action
+    # def action_result_survey(self):
+    #     self.ensure_one()
+    #     return {
+    #         'name': '调查结果向导',
+    #         'type': 'ir.actions.act_window',
+    #         'view_mode': 'form',
+    #         'res_model': 'survey.result.wizard',
+    #         'target': 'new',
+    #     }
+    #     return action
 
 
 class SurveyUserInput(models.Model):
