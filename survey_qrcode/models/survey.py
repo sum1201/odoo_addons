@@ -81,16 +81,16 @@ class Survey(models.Model):
         result.update({'global_scoring_percentage': global_scoring_percentage})
         return result
 
-    # def action_result_survey(self):
-    #     self.ensure_one()
-    #     return {
-    #         'name': '调查结果向导',
-    #         'type': 'ir.actions.act_window',
-    #         'view_mode': 'form',
-    #         'res_model': 'survey.result.wizard',
-    #         'target': 'new',
-    #     }
-    #     return action
+    def action_result_survey(self):
+        self.ensure_one()
+        return {
+            'name': '调查结果向导',
+            'type': 'ir.actions.act_window',
+            'view_mode': 'form',
+            'res_model': 'survey.result.wizard',
+            'target': 'new',
+        }
+        return action
 
 
 class SurveyUserInput(models.Model):
